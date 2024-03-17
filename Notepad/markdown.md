@@ -1,48 +1,48 @@
 # MARKDOWN VIEWER ++
 
-- [1. H2](#H2)
-	- [1.1. H3](#H3)
-		- [1.1.1. H4](#H4)
-			- [1.1.1.1. H5](#H5)
-				- [1.1.1.1.1. H6](#H6)
-- [2. Table](#Table)
-- [3. Blockquotes](#Blockquotes)
+- [1. H2](#h2)
+	- [1.1. H3](#h3)
+		- [1.1.1. H4](#h4)
+			- [1.1.1.1. H5](#h5)
+				- [1.1.1.1.1. H6](#h6)
+- [2. Table](#table)
+- [3. Blockquotes](#blockquotes)
 
 
 <br>
 
 
-## [1. H2](#MARKDOWN-VIEWER)
+## [1. H2](#markdown-viewer)
 
 fdfd
 
 fdfd
 
-### [1.1. H3](#MARKDOWN-VIEWER)
+### [1.1. H3](#markdown-viewer)
 
 fdfd
 
 fdfd
 
-#### [1.1.1. H4](#MARKDOWN-VIEWER)
+#### [1.1.1. H4](#markdown-viewer)
 
 fdfd
 
 fdfd
 
-##### [1.1.1.1. H5](#MARKDOWN-VIEWER)
+##### [1.1.1.1. H5](#markdown-viewer)
 
 fdfd
 
 fdfd
 
-###### [1.1.1.1. H6](#MARKDOWN-VIEWER)
+###### [1.1.1.1. H6](#markdown-viewer)
 
 Here is a simple footnote[^1].
 
-A footnote can also have multiple lines[^2].
+A footnote can also have multiple lines[^2].  
 
-You can also use words, to fit your writing style more closely[^note].
+You can also use words, to fit your writing style more closely[^3].
 
 
 [Readme](file://Readme.md)
@@ -105,11 +105,6 @@ h2 {
 	font-size: 22px;
 }
 
-h3 {
-	margin: 25px 20px 15px 35px;
-	font-size: 20px;
-}
-
 h4 {
 	margin: 25px 20px 15px 45px;
 	font-size: 18px;
@@ -121,13 +116,17 @@ h5 {
 }
 
 h6 {
-	margin: 25px 20px 15px 64px;
+	margin: 25px 20px 15px 65px;
 	font-size: 14px;
 }
 
 p {
-	margin: 4px 20px 4px 25px;
 	font-size: 14px;
+	margin: 2px 20px 2px 25px;
+}
+
+h3 {
+	margin: 25px 20px 15px 35px;
 }
 
 pre {
@@ -160,24 +159,41 @@ code.language-sql {
 	font-style: italic;
 }
 
-ul {
+ul, ol {
 	padding: 0;
-	margin: 20px 0 5px 35px;
+	margin: 20px 0 5px 45px;
 }
 
-li {
-	padding:0;
+ul li {
+	padding: 2px 0 2px 0;
 	margin: 0;
 	list-style-type:disc;
 }
 
-li ul {
+li ul, li ol {
 	padding: 0;
-	margin: 1px 0 1px 10px;
+	margin: 0 0 0 10px;
 }
 
 li a {
 	font-size: 12px;
+}
+
+ol p, ol li {
+	padding:0;
+	margin: 0;
+}
+
+p a {
+	font-size: 14px;
+}
+
+p a sup {
+	font-size: 10px;
+}
+
+ol li p, ol li p a {
+	font-size: 11px;
 }
 
 table {
@@ -199,16 +215,21 @@ th, td {
 }
 
 a {
-	color: #000000;
+	color: #4F4D4D;
 	text-decoration: none;
 }
 
 blockquote {
 	border-left: 2px solid #dddddd;
 	font-style: italic;
-	padding: 0 15px;
+	padding: 0 0 0 10px;
 	color: #777777;
-	margin: 15px 0;
+	margin: 4px 0 4px 25px;
+}
+
+blockquote p {
+	padding: 0;
+	margin: 0;
 }
 
 img {
@@ -216,7 +237,7 @@ img {
 }
 ```
 
-## [2. Table](#MARKDOWN-VIEWER)
+## [2. Table](#markdown-viewer)
 
 Colons can be used to align columns.
 
@@ -236,7 +257,7 @@ Markdown | Less | Pretty
 1 | 2 | 3
 
 
-## [3. Blockquotes](#MARKDOWN-VIEWER)
+## [3. Blockquotes](#markdown-viewer)
 
 
 > Blockquotes are very handy in email to emulate reply text.
@@ -247,15 +268,12 @@ Quote break.
 > This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote.
 
 
+[^1]: My reference
+[^2]: Every new line should be prefixed with 2 spaces
+  This allows you to have a footnote with multiple lines
+[^3]: Named footnotes will still render with numbers instead of the text but allow easier identification and linking
 
-
-
-
-[^1]: My reference.
-[^2]: Every new line should be prefixed with 2 spaces.
-  This allows you to have a footnote with multiple lines.
-[^note]: Named footnotes will still render with numbers instead of the text but allow easier identification and linking.
-    This footnote also has been made with a different syntax using 4 spaces for new lines.
+    This footnote also has been made with a different syntax using 4 spaces for new lines
 	
 	
 	
