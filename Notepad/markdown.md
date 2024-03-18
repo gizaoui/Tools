@@ -14,7 +14,14 @@
 
 ## [1. H2](#markdown-viewer)
 
-fdfd
+fdfdxxxxxxxx xxxxxxxxx xxxxxxxxx xxx xxxxxxxxxxx xxxxx xxxxx xxxxxxx xxxxxx xxxxxxxxxxxxxx 
+xxxxxxxxxxxxx xxxxx fdfdxxxxxxxx xxxxxxxxx xxxxxxxxx xxx xxxxxxxxxxx xxxxx xxxxx xxxxxxx 
+xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxfdfdxxxxxxxx xxxxxxxxx xxxxxxxxx xxx xxxxxxxxxxx xxxxx 
+xxxxx xxxxxxx xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxfdfdxxxxxxxx xxxxxxxxx xxxxxxxxx 
+xxx xxxxxxxxxxx xxxxx xxxxx xxxxxxx xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx xxxxxfdfdxxxxxxxx 
+xxxxxxxxx xxxxxxxxx xxx xxxxxxxxxxx xxxxx xxxxx xxxxxxx xxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxx 
+xxxxxfdfdxxxxxxxx xxxxxxxxx xxxxxxxxx xxx xxxxxxxxxxx xxxxx xxxxx xxxxxxx xxxxxx xxxxxxxxxxxxxx 
+xxxxxxxxxxxxx xxxxx
 
 fdfd
 
@@ -49,9 +56,13 @@ You can also use words, to fit your writing style more closely[^3].
 
 + `*italic*` &rightarrow; *italic*
 + `**bold**` &rightarrow; **bold**
++ `<sup>sup<sup>` &rightarrow; <sup>sup<sup>
 + `~strike~` &rightarrow; ~strike~
 + `<u>dsdsdsd</u>` &rightarrow; <u>dsdsdsd</u>
 + `~~Scratch this~~` &rightarrow; ~~Scratch this~~
++ `<span class="red">Span *will* work.</span>` &rightarrow; <span class="red">Span *will* work.</span>
++ `<span class="orange">Span *will* work.</span>` &rightarrow; <span class="orange">Span *will* work.</span>
++ `<span class="green">Span *will* work.</span>` &rightarrow; <span class="green">Span *will* work.</span>
 
 <br>
 
@@ -67,9 +78,6 @@ Strikethrough uses two tildes. ~~Scratch this~~
 &phone; 4 554 5454 
 
 
-
-<span>Span *will* work.</span>
-
 Some **bold** Some *italic* and [a link][1] 
 
 ![alt text][2]
@@ -78,9 +86,7 @@ Some **bold** Some *italic* and [a link][1]
 [2]: http://www.google.com/intl/en_ALL/images/logo.gif
   
 
-`TODO : A FAIRE`
-
-```
+```sql
 body {
 	font-family: Helvetica, arial, sans-serif;
 	font-size: 12px;
@@ -122,7 +128,10 @@ h6 {
 
 p {
 	font-size: 14px;
+	text-indent: 0;
+	white-space: break-spaces;
 	margin: 2px 20px 2px 25px;
+	padding: 0;
 }
 
 h3 {
@@ -132,7 +141,7 @@ h3 {
 pre {
 	white-space: nowrap;
 	background-color: #f8f8f8;
-	border: 1px solid #585656;
+	border: 1px solid #ADACAC;
 	font-size: 13px;
 	margin: 10px 20px 10px 25px;
 	padding: 10px;
@@ -147,17 +156,38 @@ pre code {
 	border: none;
 }
 
-p code {
-	margin: 5px 0 5px 0;
-	padding: 2px 5px 2px 5px;
-	font-weight: bold;
-	background-color: #ff4040;
+p code, li code {
+	margin: 4px 0 4px 0;
+	padding: 0 2px 0 2px;
+	background-color: #f8f8f8;
+	border: 1px solid #ADACAC;
 }
 
 code.language-sql {
 	color: blue;
 	font-style: italic;
 }
+
+span {
+	margin: 4px 0 4px 0;
+	padding: 0 2px 0 2px;
+}
+
+span.red {
+	background-color: #FE2E2E;
+	border: 1px solid #DF0101;
+}
+
+span.orange {
+	background-color: #FE9A2E;
+	border: 1px solid #DF7401;
+}
+
+span.green {
+	background-color: #2EFE2E;
+	border: 1px solid #01DF01;
+}
+
 
 ul, ol {
 	padding: 0;
