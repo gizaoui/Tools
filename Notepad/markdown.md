@@ -1,10 +1,10 @@
 # MARKDOWN VIEWER ++
 
 - [1. H2](#h2)
-	- [1.1. H3](#h3)
-		- [1.1.1. H4](#h4)
-			- [1.1.1.1. H5](#h5)
-				- [1.1.1.1.1. H6](#h6)
+  - [1.1. H3](#h3)
+    - [1.1.1. H4](#h4)
+      - [1.1.1.1. H5](#h5)
+        - [1.1.1.1.1. H6](#h6)
 - [2. Table](#table)
 - [3. Blockquotes](#blockquotes)
 
@@ -47,7 +47,7 @@ fdfd
 
 Here is a simple footnote[^1].
 
-A footnote can also have multiple lines[^2].  
+A footnote can also have multiple lines[^2]. 
 
 You can also use words, to fit your writing style more closely[^3].
 
@@ -88,182 +88,182 @@ Some **bold** Some *italic* and [a link][1]
 
 ```sql
 body {
-	font-family: Helvetica, arial, sans-serif;
-	font-size: 12px;
-	margin:0;
-	padding: 0;
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 12px;
+  margin:0;
+  padding: 0;
 }
 
 h1 {
-	text-align: center;
-	font-size: 30px;
-	background-color: #F6F6F6;
-	margin: 0 0 30px 0;
-	padding: 15px 0 25px 0;
+  text-align: center;
+  font-size: 30px;
+  background-color: #F6F6F6;
+  margin: 0 0 30px 0;
+  padding: 15px 0 25px 0;
 }
 
 h2, h3, h4, h5, h6 {
-	border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #E8E8E8;
 }
 
 h2 {
-	margin: 35px 20px 15px 25px;
-	font-size: 22px;
+  margin: 35px 20px 15px 25px;
+  font-size: 22px;
 }
 
 h4 {
-	margin: 25px 20px 15px 45px;
-	font-size: 18px;
+  margin: 25px 20px 15px 45px;
+  font-size: 18px;
 }
 
 h5 {
-	margin: 25px 20px 15px 55px;
-	font-size: 16px;
+  margin: 25px 20px 15px 55px;
+  font-size: 16px;
 }
 
 h6 {
-	margin: 25px 20px 15px 65px;
-	font-size: 14px;
+  margin: 25px 20px 15px 65px;
+  font-size: 14px;
 }
 
 p {
-	font-size: 14px;
-	text-indent: 0;
-	white-space: break-spaces;
-	margin: 2px 20px 2px 25px;
-	padding: 0;
+  font-size: 14px;
+  text-indent: 0;
+  white-space: break-spaces;
+  margin: 2px 20px 2px 25px;
+  padding: 0;
 }
 
 h3 {
-	margin: 25px 20px 15px 35px;
+  margin: 25px 20px 15px 35px;
 }
 
 pre {
-	white-space: nowrap;
-	background-color: #f8f8f8;
-	border: 1px solid #ADACAC;
-	font-size: 13px;
-	margin: 10px 20px 10px 25px;
-	padding: 10px;
-	font-style: italic;
+  white-space: nowrap;
+  background-color: #f8f8f8;
+  border: 1px solid #ADACAC;
+  font-size: 13px;
+  margin: 10px 20px 10px 25px;
+  padding: 10px;
+  font-style: italic;
 }
 
 pre code {
-	display: block;
-	white-space: pre;
-	margin: 0;
-	padding: 0;
-	border: none;
+  display: block;
+  white-space: pre;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 p code, li code {
-	margin: 4px 0 4px 0;
-	padding: 0 2px 0 2px;
-	background-color: #f8f8f8;
-	border: 1px solid #ADACAC;
+  margin: 4px 0 4px 0;
+  padding: 0 2px 0 2px;
+  background-color: #f8f8f8;
+  border: 1px solid #ADACAC;
 }
 
 code.language-sql {
-	color: blue;
-	font-style: italic;
+  color: blue;
+  font-style: italic;
 }
 
 span {
-	margin: 4px 0 4px 0;
-	padding: 0 2px 0 2px;
+  margin: 4px 0 4px 0;
+  padding: 0 2px 0 2px;
 }
 
 span.red {
-	background-color: #FE2E2E;
-	border: 1px solid #DF0101;
+  background-color: #FE2E2E;
+  border: 1px solid #DF0101;
 }
 
 span.orange {
-	background-color: #FE9A2E;
-	border: 1px solid #DF7401;
+  background-color: #FE9A2E;
+  border: 1px solid #DF7401;
 }
 
 span.green {
-	background-color: #2EFE2E;
-	border: 1px solid #01DF01;
+  background-color: #2EFE2E;
+  border: 1px solid #01DF01;
 }
 
 
 ul, ol {
-	padding: 0;
-	margin: 20px 0 5px 45px;
+  padding: 0;
+  margin: 20px 0 5px 45px;
 }
 
 ul li {
-	padding: 2px 0 2px 0;
-	margin: 0;
-	list-style-type:disc;
+  padding: 2px 0 2px 0;
+  margin: 0;
+  list-style-type:disc;
 }
 
 li ul, li ol {
-	padding: 0;
-	margin: 0 0 0 10px;
+  padding: 0;
+  margin: 0 0 0 10px;
 }
 
 li a {
-	font-size: 12px;
+  font-size: 12px;
 }
 
 ol p, ol li {
-	padding:0;
-	margin: 0;
+  padding:0;
+  margin: 0;
 }
 
 p a {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 p a sup {
-	font-size: 10px;
+  font-size: 10px;
 }
 
 ol li p, ol li p a {
-	font-size: 11px;
+  font-size: 11px;
 }
 
 table {
-	border-collapse: collapse;
-	border: 1px solid black;
-	margin: 4px 20px 20px 25px;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin: 4px 20px 20px 25px;
 }
 
 th, td {
-	border: 1px solid black;
+  border: 1px solid black;
 }
 
 th {
-	background-color: #c0c0c0;
+  background-color: #c0c0c0;
 }
 
 th, td {
-	padding: 3px 12px;
+  padding: 3px 12px;
 }
 
 a {
-	color: #4F4D4D;
-	text-decoration: none;
+  color: #4F4D4D;
+  text-decoration: none;
 }
 
 blockquote {
-	border-left: 2px solid #dddddd;
-	font-style: italic;
-	padding: 0 0 0 10px;
-	color: #777777;
-	margin: 4px 0 4px 25px;
+  border-left: 2px solid #dddddd;
+  font-style: italic;
+  padding: 0 0 0 10px;
+  color: #777777;
+  margin: 4px 0 4px 25px;
 }
 
 blockquote p {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 img {
-	max-width: 100%
+  max-width: 100%
 }
 ```
 
@@ -304,6 +304,6 @@ Quote break.
 [^3]: Named footnotes will still render with numbers instead of the text but allow easier identification and linking
 
     This footnote also has been made with a different syntax using 4 spaces for new lines
-	
-	
-	
+  
+  
+  
