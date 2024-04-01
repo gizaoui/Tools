@@ -102,6 +102,7 @@ docker volume ls | grep -v DRIVER | sed  's/^.*[ ]\+//g' | xargs docker volume r
 docker images -qa | xargs docker image rm -f;
 docker system prune -af
 
+cd /home/gizaoui/git/github/Tools/Docker
 docker ps -qa | xargs docker rm -f;
 cat > Dockerfile <<EOF
 FROM debian:latest
@@ -139,21 +140,23 @@ VOLUME /var/lib/postgresql/16/main
 CMD service apache2 start > /dev/null 2>&1 && \
 service postgresql start > /dev/null 2>&1 && \
 su - postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'postgres'\"" && \
-su - postgres -c "psql -c 'CREATE EXTENSION \"pgcrypto\"'" && \
-su - postgres -c "psql -c 'CREATE EXTENSION \"uuid-ossp\"'" && \
-su - postgres -c "psql -c \"CREATE USER gizaoui WITH ENCRYPTED PASSWORD 'gizaoui' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN\"" && \
-su - postgres -c "mkdir -p /var/lib/postgresql/16/main/base/gizaoui_ts" && \
-su - postgres -c "psql -c \"CREATE TABLESPACE gizaoui_ts OWNER gizaoui LOCATION '/var/lib/postgresql/16/main/base/gizaoui_ts'\"" && \
-su - postgres -c "psql -c \"CREATE DATABASE gzi_db WITH ENCODING = 'UTF8' OWNER = gizaoui TABLESPACE = gizaoui_ts CONNECTION LIMIT = -1\"" && \
+su - postgres -c "psql -c 'CREATE EXTENSION IF NOT EXISTS \"pgcrypto\"'" && \
+su - postgres -c "psql -c 'CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"'" && \
+[ -z $(su - postgres -c "psql -U postgres -tc \"SELECT 1 FROM pg_catalog.pg_user WHERE usename='gizaoui'\"") ] && su - postgres -c "psql -c \"CREATE USER gizaoui WITH ENCRYPTED PASSWORD 'gizaoui' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN\"" && \
+su - postgres -c "[ ! -d \"/var/lib/postgresql/16/main/base/gizaoui_ts\" ] &&  mkdir -p /var/lib/postgresql/16/main/base/gizaoui_ts" && \
+[ -z $(su - postgres -c "psql -U postgres -tc \"SELECT 1 FROM pg_tablespace WHERE spcname='gizaoui_ts'\"") ] && su - postgres -c "psql -c \"CREATE TABLESPACE gizaoui_ts OWNER gizaoui LOCATION '/var/lib/postgresql/16/main/base/gizaoui_ts'\"" && \
+[ -z $(su - postgres -c "psql -U postgres -tc \"SELECT 1 FROM pg_database WHERE datistemplate=false AND datname='gzi_db'\"") ] && su - postgres -c "psql -c \"CREATE DATABASE gzi_db WITH ENCODING = 'UTF8' OWNER = gizaoui TABLESPACE = gizaoui_ts CONNECTION LIMIT = -1\"" && \
 sh -c "sleep infinity"
 EOF
 docker build -t debian-apache2:v1.0 . 2>&1 | tee build.log
 ```
-
 - Lancement du *container* -> `docker run --detach --name c1 --publish 8081:80 --publish 5432:5432 debian-apache2:v1.0`
+- Logs -> `docker logs c1`
 - Point de montage -> `docker inspect c1 | jq '.[]' | jq '.Mounts[]'` ou `docker volume inspect c1`
 - Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
 - Sur le host  -> `psql -h localhost -p 5432 -U gizaoui -d gzi_db`
+
+
 
 
 ----------------------------------
