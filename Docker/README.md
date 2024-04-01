@@ -150,13 +150,15 @@ EOF
 docker build -t debian-apache2:v1.0 . 2>&1 | tee build.log
 ```
 
-Lancement du *container* -> `docker run --detach --name c1 --publish 8081:80 --publish 5432:5432 debian-apache2:v1.0`
-Point de montage -> `docker inspect c1 | jq '.[]' | jq '.Mounts[]'` ou `docker volume inspect c1`
-Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
+- Lancement du *container* -> `docker run --detach --name c1 --publish 8081:80 --publish 5432:5432 debian-apache2:v1.0`
+- Point de montage -> `docker inspect c1 | jq '.[]' | jq '.Mounts[]'` ou `docker volume inspect c1`
+- Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
+- Sur le host  -> `psql -h localhost -p 5432 -U gizaoui -d gzi_db`
 
-Sur le host  -> `psql -h localhost -p 5432 -U gizaoui -d gzi_db`
 
 ----------------------------------
+
+## TODO :
 
 
 ```
