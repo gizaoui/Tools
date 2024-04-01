@@ -18,72 +18,75 @@ Peut écraser les données dans l'image lors de la création du point de montage
 
 
 ### Docker
-`curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/debian.gpg`
-`add-apt-repository -y "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable"`
-`apt update -y`
-`apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin`
-`usermod -aG docker gizaoui`
+- `curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/debian.gpg`
+- `add-apt-repository -y "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable"`
+- `apt update -y`
+- `apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin`
+- `usermod -aG docker gizaoui`
 
 # Minicube
-`cd /opt`
-`curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64`
-`chmod +x ./minikube-linux-amd64`
-`install ./minikube-linux-amd64 /usr/local/bin/minikube`
-`curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"`
-`chmod +x ./kubectl &&  mv ./kubectl /usr/local/bin`
-Test -> `kubectl version --client -o yaml`
+- `cd /opt`
+- `curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64`
+- `chmod +x ./minikube-linux-amd64`
+- `install ./minikube-linux-amd64 /usr/local/bin/minikube`
+- `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"`
+- `chmod +x ./kubectl &&  mv ./kubectl /usr/local/bin`
+- Test -> `kubectl version --client -o yaml`
 
 
 ## Principales commandes
 
-Arrêt de l'image -> `docker stop c1`
-Re-démarrage de l'image -> `docker start c1`
-Suppression des *container* actifs -> `docker ps -q | xargs docker rm -f`
-Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
-Suppression de toutes les images -> `docker images -qa | xargs docker image rm -f`
-Liste des volumes -> `docker volume ls`
+- Arrêt de l'image -> `docker stop c1`
+- Re-démarrage de l'image -> `docker start c1`
+- Suppression des *container* actifs -> `docker ps -q | xargs docker rm -f`
+- Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
+- Suppression de toutes les images -> `docker images -qa | xargs docker image rm -f`
+- Liste des volumes -> `docker volume ls`
 
 ### Image NGINX
-Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
-Le téléchargement & lancement d'une image via nommé -> `docker run --detach --name c1 --publish 8080:80 nginx:latest`
-Lancement d'une console d'acces au **container** -> `docker exec -ti c1 bash`
-Utilisation de l'IP configurée dans le *Vagrantfile* -> `curl 192.168.56.101:8080` ou `curl localhost:8080`
+- Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
+- Le téléchargement & lancement d'une image via nommé -> `docker run --detach --name c1 --publish 8080:80 nginx:latest`
+- Lancement d'une console d'acces au **container** -> `docker exec -ti c1 bash`
+- Utilisation de l'IP configurée dans le *Vagrantfile* -> `curl 192.168.56.101:8080` ou `curl localhost:8080`
 
 ### Image nginx avec volume
 
 #### Gestion des volumes
+
 Liste des volumes -> `docker volume ls`
 
 #### Méthode volume
-Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
-Suppression de tous les volumes ->`docker volume ls | grep -v DRIVER | sed  's/^.*[ ]\+//g' | xargs docker volume rm`
-Création d'un volume -> `docker volume create mynginx`
-Lancement d'un *container* -> `docker run --detach --name c1 --publish 8080:80 --volume mynginx:/usr/share/mynginx/html/ nginx:latest`
-Point de montage -> `docker volume inspect mynginx`
-Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
+
+- Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
+- Suppression de tous les volumes ->`docker volume ls | grep -v DRIVER | sed  's/^.*[ ]\+//g' | xargs docker volume rm`
+- Création d'un volume -> `docker volume create mynginx`
+- Lancement d'un *container* -> `docker run --detach --name c1 --publish 8080:80 --volume mynginx:/usr/share/mynginx/html/ nginx:latest`
+- Point de montage -> `docker volume inspect mynginx`
+- Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
 
 #### Méthode type=volume
-Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
-Suppression de tous les volumes ->`docker volume ls | grep -v DRIVER | sed  's/^.*[ ]\+//g' | xargs docker volume rm`
-Création d'un volume -> `docker volume create mynginx`
-Lancement du *container* -> `docker run --detach --name c1 --publish 8080:80 --mount type=volume,source=mynginx,destination=/usr/share/nginx/html/ nginx:latest`
-Point de montage -> `docker volume inspect mynginx`
-Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
+
+- Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
+- Suppression de tous les volumes ->`docker volume ls | grep -v DRIVER | sed  's/^.*[ ]\+//g' | xargs docker volume rm`
+- Création d'un volume -> `docker volume create mynginx`
+- Lancement du *container* -> `docker run --detach --name c1 --publish 8080:80 --mount type=volume,source=mynginx,destination=/usr/share/nginx/html/ nginx:latest`
+- Point de montage -> `docker volume inspect mynginx`
+- Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
 
 #### Méthode type=bind
-Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
-Créer les répertoires et fichier en mode **root** -> `rm -fr /mnt/data && mkdir -p /mnt/docker start c1data`
-Lancement du *container* -> `docker run --detach --name c1 --mount type=bind,source=/mnt/data,destination=/usr/share/nginx/html/ nginx:latest`
-Point de montage -> `docker inspect c1 | jq '.[]' | jq '.Mounts[]'`
-Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
 
+- Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
+- Créer les répertoires et fichier en mode **root** -> `rm -fr /mnt/data && mkdir -p /mnt/docker start c1data`
+- Lancement du *container* -> `docker run --detach --name c1 --mount type=bind,source=/mnt/data,destination=/usr/share/nginx/html/ nginx:latest`
+- Point de montage -> `docker inspect c1 | jq '.[]' | jq '.Mounts[]'`
+- Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
 
 ### Image DEBIAN
 
-Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
-Lancement du *container* -> `docker run --detach --name c1 debian:latest sleep infinity`
-Lancement d'une console d'acces au **container** -> `docker exec -ti c1 bash`
-*Commit* des éventuelles mise à jour réalisées dans le *container* -> `docker commit c1 debian:latest`
+- Suppression de tous les *container* -> `docker ps -qa | xargs docker rm -f`
+- Lancement du *container* -> `docker run --detach --name c1 debian:latest sleep infinity`
+- Lancement d'une console d'acces au **container** -> `docker exec -ti c1 bash`
+- *Commit* des éventuelles mise à jour réalisées dans le *container* -> `docker commit c1 debian:latest`
 
 
 #### Dockerfile
@@ -154,7 +157,6 @@ Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
 Sur le host  -> `psql -h localhost -p 5432 -U gizaoui -d gzi_db`
 
 ----------------------------------
-
 
 
 ```
