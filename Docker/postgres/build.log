@@ -1,0 +1,54 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 3.59kB 0.0s done
+#1 DONE 0.5s
+
+#2 [internal] load metadata for docker.io/library/debian:latest
+#2 DONE 1.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.2s
+
+#4 [ 1/12] FROM docker.io/library/debian:latest@sha256:e97ee92bf1e11a2de654e9f3da827d8dce32b54e0490ac83bfc65c8706568116
+#4 DONE 0.0s
+
+#5 [11/12] RUN updatedb
+#5 CACHED
+
+#6 [ 3/12] RUN apt-get -y install tzdata locales gnupg lsb-release ca-certificates curl wget less vim mlocate tree apache2 libapache2-mod-php # php-{common,pgsql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl}
+#6 CACHED
+
+#7 [ 8/12] RUN apt-get install -y postgresql postgresql-client postgresql-contrib && su - postgres -c "sed -i "s/#[ ]*listen_addresses.*/listen_addresses='*'/g" /etc/postgresql/16/main/postgresql.conf" && su - postgres -c "sed -i "s/127\.0\.0\.1\/32/0\.0\.0\.0\/0/g" /etc/postgresql/16/main/pg_hba.conf" && su - postgres -c "sed -i "s/1\/128/0\/0/g" /etc/postgresql/16/main/pg_hba.conf"
+#7 CACHED
+
+#8 [ 6/12] RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+#8 CACHED
+
+#9 [ 5/12] RUN echo "deb https://apt.postgresql.org/pub/repos/apt bookworm-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+#9 CACHED
+
+#10 [ 9/12] RUN rm -f /var/www/html/* && cat > /var/www/html/index.php <<EOFPHP
+#10 CACHED
+
+#11 [10/12] RUN useradd -u 1000 -G postgres -m -d /home/gizaoui gizaoui -s /bin/bash && usermod -g postgres gizaoui
+#11 CACHED
+
+#12 [ 2/12] RUN apt-get update -y
+#12 CACHED
+
+#13 [ 4/12] RUN echo 'fr_FR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
+#13 CACHED
+
+#14 [ 7/12] RUN apt-get update -y && apt-get clean
+#14 CACHED
+
+#15 [12/12] RUN cat >> /root/.bashrc <<EOFBACHRC
+#15 CACHED
+
+#16 exporting to image
+#16 exporting layers done
+#16 writing image sha256:d942f98841a83a3f0ce30d5e1016c80078fa9647a3096a362390547987226f13 0.0s done
+#16 naming to docker.io/library/debian-apache2:v1.0 0.1s done
+#16 DONE 0.2s
