@@ -3,7 +3,7 @@ services:
 
   # Image Flask
   monapp:
-    image: myflask:v1.0
+    image: myflask:latest
     depends_on:
       - redis
     ports:
