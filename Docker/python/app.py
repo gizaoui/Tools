@@ -7,7 +7,7 @@ import socket
 
 app = Flask(__name__)
 
-redis=Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+redis=Redis(host="redis-project", db=0, socket_connect_timeout=2, socket_timeout=2)
 
 @app.route("/")
 def hello():
@@ -15,9 +15,9 @@ def hello():
       visites = redis.incr("compteur")
     except RedisError:
       visites = "<i>Erreur de connexion Redis, compteur désactivé</i>"
-      
+
     html = \
-      "<h3>Bonjour {nom}</h3>" \
+      "<h3>Chiao {nom}</h3>" \
       "<b>Hostname : </b> {hostname}<br/>" \
       "<b>Visites : </b> {visites}<br/>"
       
