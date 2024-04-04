@@ -21,7 +21,7 @@ def hello():
       "<b>Hostname : </b> {hostname}<br/>" \
       "<b>Visites : </b> {visites}<br/>"
       
-    return html.format(nom=os.getenv("NOM", "gizaoui"), hostname=socket.gethostname(), visites=visites)
+    return html.format(nom=os.getenv("NAME", "????"), hostname=socket.gethostname(), visites=visites)
 
 
 if __name__ == "__main__":

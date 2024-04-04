@@ -43,8 +43,8 @@
 - Liste service -> `kubectl get services`
 - Accès à l'url http://192.168.49.2:30008 -> `minikube service myflask-project --url` 
 - Test -> `curl $(minikube service myflask-project --url)`
-- Suppression déploiements -> `kubectl delete deployment myflask-project redis`
-- Suppression services -> `kubectl delete service myflask-project redis`
+- Suppression déploiements -> `kubectl delete deployment myflask-project redis-project`
+- Suppression services -> `kubectl delete service myflask-project redis-project`
 
 - Méthode en ligne de commande -> `kubectl run myflask --image=myflask:latest --image-pull-policy=Never`
 

@@ -63,6 +63,9 @@ spec:
       containers:
         - name: myflask
           image: myflask:latest
+          env:
+          - name: NAME
+            value: "My name"
           ports:
             - containerPort: 5000
           imagePullPolicy: Never
