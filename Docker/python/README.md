@@ -59,7 +59,7 @@
 - Accès à l'url http://192.168.49.2:30008 -> `minikube service flask-redis-project --url` 
 - Test -> `curl $(minikube service flask-redis-project --url)`
 - Suppression déploiements -> `kubectl delete deployment flask-redis-project`
-- Suppression services -> `kubectl delete service flask-redis-project redis-project`
+- Suppression services -> `kubectl delete service flask-redis-project`
 
 
 ## 5. DIVERS
