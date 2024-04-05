@@ -7,7 +7,14 @@ import socket
 
 app = Flask(__name__)
 
-redis=Redis(host="redis-project", db=0, socket_connect_timeout=2, socket_timeout=2)
+## docker-compose
+# redis=Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+
+## Minikube Multi-deploy
+# redis=Redis(host="redis-project", db=0, socket_connect_timeout=2, socket_timeout=2)
+
+## Minikube Multi-container
+redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 
 @app.route("/")
 def hello():
@@ -17,7 +24,7 @@ def hello():
       visites = "<i>Erreur de connexion Redis, compteur désactivé</i>"
 
     html = \
-      "<h3>Chiao {nom}</h3>" \
+      "<h3>Hello {nom}</h3>" \
       "<b>Hostname : </b> {hostname}<br/>" \
       "<b>Visites : </b> {visites}<br/>"
       

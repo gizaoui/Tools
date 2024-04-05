@@ -35,7 +35,8 @@
 - Suppression déploiements -> `kubectl delete deployment nginx-project`
 - Suppression services -> `kubectl delete service nginx-project`
 
-### 4.2. Flask + Redis
+
+### 4.2. Flask + Redis (multi-pods)
 
 - Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_myflask.yaml`
 - Log -> `kubectl logs deployment/myflask-project` ou `kubectl logs -f deployment/myflask-project`
@@ -47,6 +48,18 @@
 - Suppression services -> `kubectl delete service myflask-project redis-project`
 
 - Méthode en ligne de commande -> `kubectl run myflask --image=myflask:latest --image-pull-policy=Never`
+
+
+### 4.3. Flask + Redis (multi-container)
+
+- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_myflask_multi_container.yaml`
+- Log -> `kubectl logs deployment/flask-redis-project` ou `kubectl logs -f deployment/flask-redis-project`
+- Liste déploiement -> `kubectl get deployments`
+- Liste service -> `kubectl get services`
+- Accès à l'url http://192.168.49.2:30008 -> `minikube service flask-redis-project --url` 
+- Test -> `curl $(minikube service flask-redis-project --url)`
+- Suppression déploiements -> `kubectl delete deployment flask-redis-project`
+- Suppression services -> `kubectl delete service flask-redis-project redis-project`
 
 
 ## 5. DIVERS
