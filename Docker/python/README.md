@@ -11,7 +11,7 @@
 
 - Run -> `docker run --name c1 --publish 5000:5000 myflask:latest`
 - Logs -> `docker logs c1`
-- Start containers* -> `docker start c1`
+- Start *containers* -> `docker start c1`
 
 ## 3. Démarrage avec Redis (docker-compose)
 
