@@ -34,7 +34,7 @@
 - Liste ingress -> `kubectl get ingress`
 - INTERNAL-IP - EXTERNAL-IP -> `kubectl get nodes -o wide`
 - Test -> `curl $(minikube service nginx-project --url)`
-- Test (simule la màj de /etc/hosts ) -> `curl http://hello-worldapp.com/ --resolve hello-worldapp.com:80:192.168.49.2`
+- Test (simule la màj de */etc/hosts* ) -> `curl http://hello-worldapp.com/ --resolve hello-worldapp.com:80:192.168.49.2`
 - Suppression déploiements -> `kubectl delete deployment nginx-project`
 - Suppression services -> `kubectl delete service nginx-project`
 - Suppression ingress -> `kubectl delete ingress nginx-project`
