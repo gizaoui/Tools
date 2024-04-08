@@ -31,37 +31,33 @@
 - Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_nginx.yaml`
 - Log -> `kubectl logs deployment/nginx-project` ou `kubectl logs -f deployment/nginx-project`
 - Liste service -> `kubectl get deployments`
+- Liste ingress -> `kubectl get ingress`
+- INTERNAL-IP - EXTERNAL-IP -> `kubectl get nodes -o wide`
 - Test -> `curl $(minikube service nginx-project --url)`
+- Test (simule la màj de /etc/hosts ) -> `curl http://hello-worldapp.com/ --resolve hello-worldapp.com:80:192.168.49.2`
 - Suppression déploiements -> `kubectl delete deployment nginx-project`
 - Suppression services -> `kubectl delete service nginx-project`
+- Suppression ingress -> `kubectl delete ingress nginx-project`
+
 
 
 ### 4.2. Flask + Redis (multi-pods)
 
-- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_myflask.yaml`
+- Déploiement -> `eval $(minikube -p minikube docker-env) && kkubectl get ingressubectl create -f ./k8s_myflask.yaml`
 - Log -> `kubectl logs deployment/myflask-project` ou `kubectl logs -f deployment/myflask-project`
 - Liste déploiement -> `kubectl get deployments`
 - Liste service -> `kubectl get services`
 - Accès à l'url http://192.168.49.2:30008 -> `minikube service myflask-project --url` 
 - Test -> `curl $(minikube service myflask-project --url)`
 - Suppression déploiements -> `kubectl delete deployment myflask-project redis-project`
-- Suppression services -> `kubectl delete service myflask-project redis-project`
+- Suppression services -> `kubectl delete service myflask-project redkubectl get nodes -o wideis-project`
 
 - Méthode en ligne de commande -> `kubectl run myflask --image=myflask:latest --image-pull-policy=Never`
 
 
 ### 4.3. Flask + Redis (multi-container)
 
-- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_myflask_multi_container.yaml`
-- Log -> `kubectl logs deployment/flask-redis-project` ou `kubectl logs -f deployment/flask-redis-project`
-- Liste déploiement -> `kubectl get deployments`
-- Liste service -> `kubectl get services`
-- Accès à l'url http://192.168.49.2:30008 -> `minikube service flask-redis-project --url` 
-- Test -> `curl $(minikube service flask-redis-project --url)`
-- Suppression déploiements -> `kubectl delete deployment flask-redis-project`
-- Suppression services -> `kubectl delete service flask-redis-project`
-
-
+  
 ## 5. DIVERS
 
 - -> `docker image save -o myflask.tar myflask:latest`
