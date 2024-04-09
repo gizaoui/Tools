@@ -28,6 +28,8 @@
 
 ### 4.1. NGINX
 
+https://gitlab.com/xavki/presentations-kubernetes/-/blob/master/54-hello-world/slides.md?ref_type=heads
+
 - Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_nginx.yaml`
 - Log -> `kubectl logs deployment/nginx-project` ou `kubectl logs -f deployment/nginx-project`
 - Liste service -> `kubectl get deployments`
