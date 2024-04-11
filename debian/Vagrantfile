@@ -1,0 +1,109 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # _____________  mydebian  _____________
+  config.vm.define "mydebian" do |kub|
+     kub.vm.box = "debian/bookworm64"
+     kub.vm.box_check_update = true
+     kub.vm.hostname = "mydebian"
+     kub.vm.box_url = "debian/bookworm64"
+     kub.vm.box_check_update = true
+     kub.vm.synced_folder ".", "/home/vagrant/share_local"
+     
+     # Accès depuis l'extérieur de la vm 
+     kub.vm.network "private_network", ip: "192.168.56.101"
+
+     kub.vm.provider "virtualbox" do |vb|
+       vb.name = "mydebian"
+       vb.gui = false
+       vb.memory = "2048"
+     end
+
+     kub.vm.provision "shell", inline: <<-SHELL
+       echo "START UPDATE SYSTEM ..."
+       
+       # =======  COMMON  ======= 
+       export DEBIAN_FRONTEND=noninteractive
+       apt-get -y update
+       apt install -y zstd console-data keyboard-configuration console-setup vim lsb-release gnupg2 apt-transport-https ca-certificates curl software-properties-common curl git jq
+       
+       # =======  SSH  =======
+       sed -i 's/^#* *\(PermitRootLogin\)\(.*\)$/\1 yes/' /etc/ssh/sshd_config
+       sed -i 's/^#* *\(PasswordAuthentication\)\(.*\)$/\1 yes/' /etc/ssh/sshd_config
+       systemctl restart sshd.service
+       
+       # =======  USERS  =======
+       echo -e "pwd\npwd" | (passwd vagrant)
+       echo -e "pwd\npwd" | (passwd root)
+       
+       # =======  DOCKER  =======
+       curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/debian.gpg
+       add-apt-repository -y "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+       apt update -y
+       apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+       usermod -aG docker vagrant
+       cd /opt/
+       curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+       chmod +x ./minikube-linux-amd64
+       install ./minikube-linux-amd64 /usr/local/bin/minikube
+       curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+       chmod +x ./kubectl &&  mv ./kubectl /usr/local/bin
+       # kubectl version --client -o yaml
+
+       # =======  KEYBOARD  =======
+       cat > /etc/default/keyboard <<EOF
+XKBMODEL="pc105"
+XKBLAYOUT="fr"
+XKBVARIANT=""
+XKBOPTIONS=""    
+BACKSPACE="guess"
+EOF
+       dpkg-reconfigure keyboard-configuration
+       service keyboard-setup restart
+       echo "KEYMAP=y" >> /etc/initramfs-tools/initramfs.conf
+       update-initramfs -u
+       
+       # =======  BASHRC ROOT  =======
+       cat >> /root/.bashrc <<EOF
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors)"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -Al'
+alias l='ls $LS_OPTIONS -A'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias h='history'
+alias b='vim ~/.bashrc'
+alias s='source ~/.bashrc'
+alias i='vim /etc/network/interfaces'
+alias u='apt-get update && apt-get upgrade && apt-get clean'
+alias f='findmnt'
+export PS1='\\[\\033[1;31m\\]\\u@`hostname -I | cut -d" " -f1`\\[\\033[00m\\]:\\[\\033[0;37m\\]\\w\\[\\033[00m\\] \\$ '
+EOF
+
+       # =======  BASHRC ROOT  =======
+       cat >> /home/vagrant/.bashrc <<EOF
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors)"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -Al'
+alias l='ls $LS_OPTIONS -A'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias h='history'
+alias b='vim ~/.bashrc'
+alias s='source ~/.bashrc'
+alias f='findmnt'
+
+export PS1='\\[\\033[1;34m\\]\\u@`hostname -I | cut -d" " -f1`\\[\\033[00m\\]:\\[\\033[0;37m\\]\\w\\[\\033[00m\\] \\$ '
+EOF
+       echo "END UPDATE SYSTEM"
+    SHELL
+  end
+  # _____________  mydebian  _____________
+  
+end
