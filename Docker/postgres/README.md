@@ -145,9 +145,9 @@ su - postgres -c "psql -c 'CREATE EXTENSION IF NOT EXISTS \"pgcrypto\"'" && \
 su - postgres -c "psql -c 'CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"'" && \
 sh -c "sleep infinity"
 EOF
-docker build -t debian-apache2:v1.0 . 2>&1 | tee build.log
+docker build -t debian-apache:v1.0 . 2>&1 | tee build.log
 ```
-- Lancement du *container* -> `docker run --detach --name c1 --publish 8081:80 --publish 5432:5432 debian-apache2:v1.0`
+- Lancement du *container* -> `docker run --detach --name c1 --publish 8081:80 --publish 5432:5432 debian-apache:v1.0`
 - Logs -> `docker logs c1`
 - Point de montage -> `docker inspect c1 | jq '.[]' | jq '.Mounts[]'` ou `docker volume inspect c1`
 - Lancement d'une console d'acces au *container* -> `docker exec -ti c1 bash`
