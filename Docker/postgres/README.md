@@ -102,7 +102,7 @@ docker volume ls | grep -v DRIVER | sed  's/^.*[ ]\+//g' | xargs docker volume r
 docker images -qa | xargs docker image rm -f;
 docker system prune -af
 
-cd /home/gizaoui/git/github/Tools/Docker
+cd /home/gizaoui/git/github/Tools/Docker/postgres
 docker ps -qa | xargs docker rm -f;
 cat > Dockerfile <<EOF
 FROM debian:latest
