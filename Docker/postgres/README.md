@@ -122,6 +122,7 @@ RUN rm -f /var/www/html/* && cat > /var/www/html/index.php <<EOFPHP
   phpinfo();
 ?>
 EOFPHP
+# usermod -aG postgres gizaoui
 RUN useradd -u 1000 -G postgres -m -d /home/gizaoui gizaoui -s /bin/bash && usermod -g postgres gizaoui
 RUN updatedb 
 RUN cat >> /root/.bashrc <<EOFBACHRC
