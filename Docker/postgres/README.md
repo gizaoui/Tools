@@ -97,7 +97,7 @@ C'est une alternative au *docker commit*.
 ### POSGRESQL
 
 ```
-docker ps -qa | xargs docker rm -f;
+docker ps -qa | grep -v -e 82fd674cf194 -e 7184040bf066 | xargs docker rm -f;
 docker volume ls | grep -v DRIVER | sed  's/^.*[ ]\+//g' | xargs docker volume rm;
 docker images -qa | xargs docker image rm -f;
 docker system prune -af
