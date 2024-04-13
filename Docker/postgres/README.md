@@ -103,7 +103,7 @@ docker images -qa | xargs docker image rm -f;
 docker system prune -af
 
 cd /home/gizaoui/git/github/Tools/Docker/postgres
-docker ps -qa | xargs docker rm -f;
+docker ps -qa | grep -v -e 82fd674cf194 -e 7184040bf066 | xargs docker rm -f;
 cat > Dockerfile <<EOF
 FROM debian:latest
 RUN apt-get update -y
