@@ -9,17 +9,17 @@ L'application python et à la base de données *Redis* sont situées sur le mêm
 redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 ```
 
-- Remove *containers* (except *minicube*) -> `docker ps -qa | xargs docker rm -f`
-- Remove *images* (except *minicube*) -> `docker images -qa | xargs docker image rm -f`
-- Build docker -> `eval $(minikube -p minikube docker-env) && docker build -t myflaskmulticont . 2>&1 | tee build.log`
-- Suppression de l'image -> `minikube image  rm myflaskmulticont`
-- Build -> `minikube image build -t myflaskmulticont .`
+- Suppression de l'image -> `minikube image rm myflask-multi-cont`
+- Build docker -> `eval $(minikube -p minikube docker-env) && docker build -t myflask-multi-cont . 2>&1 | tee build.log`
+- Build -> `minikube image build -t myflask-multi-cont .`
 - Liste des images -> `minikube image ls --format table`
+- Suppression des images *none* `minikube image ls --format table | grep docker.io\/library\/\<none\> | cut -d"|" -f4 | xargs minikube image rm`
 
 ### 4.2. Flask + Redis
 
 - Se positionner -> `~/git/github/Tools/Kubernetes/python/multi-container`
 - Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_myflask_multi_container.yaml`
+- Running -> `kubectl get pods`
 - Liste déploiement -> `kubectl get deployments`
 - Liste service -> `kubectl get services`
 - Log -> `kubectl logs deployment/multi-container-project` 
@@ -37,7 +37,7 @@ redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 - -> `minikube image load myflask.tar`
 - -> `minikube image list`
 
-
+kubectl get nodes -o wide
 - [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
     -[Node port](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport)
 

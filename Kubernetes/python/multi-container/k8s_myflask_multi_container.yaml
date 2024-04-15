@@ -13,7 +13,7 @@ spec:
         app: multi-container-project
     spec:
       containers:
-        - name: redis
+        - name: redis-img
           image: redis:latest
           ports:
             - containerPort: 6379
@@ -21,8 +21,8 @@ spec:
             limits:
               memory: "200Mi"
               cpu: "500m"
-        - name: myflaskmulticont
-          image: myflaskmulticont:latest
+        - name: myflask-multi-cont-img
+          image: myflask-multi-cont:latest
           env:
           - name: NAME
             value: "My name"
