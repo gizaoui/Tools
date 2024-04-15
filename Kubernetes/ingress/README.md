@@ -22,5 +22,5 @@ https://gitlab.com/xavki/presentations-kubernetes/-/blob/master/54-hello-world/s
 kubectl delete deployment nginx-deploy
 kubectl delete service nginx-service
 kubectl delete ingress nginx-ingress
+eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml
 ```
-
