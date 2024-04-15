@@ -9,9 +9,10 @@ L'application python et à la base de données *Redis* sont situées sur le mêm
 redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 ```
 
+- Se positionner -> `~/git/github/Tools/Kubernetes/python/multi-container`
 - Suppression de l'image -> `minikube image rm myflask-multi-cont`
-- Build docker -> `eval $(minikube -p minikube docker-env) && docker build -t myflask-multi-cont . 2>&1 | tee build.log`
 - Build -> `minikube image build -t myflask-multi-cont .`
+- Build docker -> `eval $(minikube -p minikube docker-env) && docker build -t myflask-multi-cont . 2>&1 | tee build.log`
 - Liste des images -> `minikube image ls --format table`
 - Suppression des images *none* `minikube image ls --format table | grep docker.io\/library\/\<none\> | cut -d"|" -f4 | xargs minikube image rm`
 

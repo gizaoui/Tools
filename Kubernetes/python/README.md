@@ -5,7 +5,7 @@
 - Remove *containers* none -> `docker images -f "dangling=true" -q | xargs docker image rm -f`
 - Remove *containers* (except *minicube*) -> `docker ps -qa | xargs docker rm -f`
 - Remove *images* (except *minicube*) -> `docker images -qa | xargs docker image rm -f`
-- Build -> `docker build -t myflask . 2>&1 | tee build.log`
+- Build -> `eval $(minikube -p minikube docker-env) && docker build -t myflask . 2>&1 | tee build.log`
 
 ## 2. Démarrage sans Redis (Dockerfile)
 
