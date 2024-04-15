@@ -23,8 +23,8 @@ redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 - Liste déploiement -> `kubectl get deployments`
 - Liste service -> `kubectl get services`
 - Log -> `kubectl logs deployment/multi-container-project` 
-- Accès à l'url http://192.168.49.2:30008 -> `minikube service multi-container-project --url` 
-- Test -> `curl $(minikube service multi-container-project --url)`
+- Accès à l'url http://192.168.49.2:30008 -> `minikube service multi-container-service --url` 
+- Test -> `curl $(minikube service multi-container-service --url)`
 
 - Méthode en ligne de commande -> `kubectl run myflask-multi-container-project --image=myflask:latest --image-pull-policy=Never`
 
