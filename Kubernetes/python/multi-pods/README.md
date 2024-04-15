@@ -24,3 +24,10 @@ redis=Redis(host="redis-project", db=0, socket_connect_timeout=2, socket_timeout
 - Liste service -> `kubectl get services`
 - Test -> `curl $(minikube service myflask-multi-pod-service --url)`
 
+
+- Delete all
+
+```bash
+kubectl delete deployment myflask-multi-pod-deploy redis-deploy
+kubectl delete service myflask-multi-pod-service redis-service
+```
