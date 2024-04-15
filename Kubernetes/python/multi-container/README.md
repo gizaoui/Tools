@@ -1,5 +1,6 @@
 # MULTI-CONTAINER
 
+https://kubernetes.io/fr/docs/reference/kubectl/cheatsheet/
 
 ## 1. Construction de l'image
 
@@ -19,7 +20,7 @@ redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 ### 4.2. Flask + Redis
 
 - Se positionner -> `cd ~/git/github/Tools/Kubernetes/python/multi-container`
-- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_myflask_multi_container.yaml`
+- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml`
 - Running -> `kubectl get pods`
 - Liste déploiement -> `kubectl get deployments`
 - Liste service -> `kubectl get services`

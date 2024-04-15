@@ -21,12 +21,6 @@ spec:
             limits:
               memory: "200Mi"
               cpu: "500m"
- #         volumeMounts:
- #         - name: redis-storage
- #           mountPath: /data/redis
- #     volumes:
- #     - name: redis-storage
- #       emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment

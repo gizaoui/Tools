@@ -1,5 +1,7 @@
 # MULTI-PODS
 
+https://kubernetes.io/fr/docs/reference/kubectl/cheatsheet/
+
 
 ## 1. Construction de l'image
 
@@ -18,7 +20,7 @@ redis=Redis(host="redis-project", db=0, socket_connect_timeout=2, socket_timeout
 
 ### 2. Flask + Redis (multi-pods)
 
-- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s_myflask.yaml`
+- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml`
 - Log -> `kubectl logs deployment/myflask-project`
 - Liste déploiement -> `kubectl get deployments`
 - Liste service -> `kubectl get services`
