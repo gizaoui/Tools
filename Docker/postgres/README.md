@@ -10,7 +10,7 @@ Peut écraser les données dans l'image lors de la création du point de montage
 - `mount --bind /lib /jail/lib`
 - `mount --bind /lib64 /jail/lib64`
 - `chroot /jail/ /bin/bash`
-- `umount /jail/bin /jail/lib /jail/lib64`
+- `umount /jail/bin /jail/lib /jail/lib64` 
 - `\rm -fr /jail/`
 
 

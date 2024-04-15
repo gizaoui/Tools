@@ -1,0 +1,109 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+
+  # _____________  myoraclelinux  _____________
+  config.vm.define "oraclelinux" do |kub|
+  
+     kub.vm.box = "oraclelinux/9-btrfs"
+     kub.vm.box_url = "https://oracle.github.io/vagrant-projects/boxes/oraclelinux/9-btrfs.json"
+     kub.vm.box_check_update = true
+     kub.vm.hostname = "oraclelinux"
+     kub.vm.box_check_update = true
+     kub.vm.synced_folder ".", "/home/vagrant/share_local"
+     
+     # Accès depuis l'extérieur de la vm 
+     kub.vm.network "private_network", ip: "192.168.56.101"
+
+     kub.vm.provider "virtualbox" do |vb|
+       vb.name = "oraclelinux"
+       vb.gui = false
+       vb.memory = "2048"
+     end
+
+     kub.vm.provision "shell", inline: <<-SHELL
+       echo "START UPDATE SYSTEM ..."
+       
+       # =======  COMMON  =======
+       yum -y update
+       sed -i "s/SELINUX=.*/SELINUX=disabled/" /etc/selinux/config
+       yum install -y glibc-all-langpacks vim tree mlocate
+       # yum install -y xorg-x11-xauth dbus-x11 xorg-x11-xinit xorg-x11-drv-evdev xorg-x11-drv-synaptics xorg-x11-utils xinit 
+  
+       # =======  SSH  =======
+       sed -i 's/^#* *\(PermitRootLogin\)\(.*\)$/\1 yes/' /etc/ssh/sshd_config
+       sed -i 's/^#* *\(PasswordAuthentication\)\(.*\)$/\1 yes/' /etc/ssh/sshd_config
+       systemctl restart sshd.service
+       
+       # =======  POSTGRESQL  =======
+       yum install -y postgresql-server postgresql-contrib
+       systemctl enable postgresql.service
+       systemctl restart postgresql.service
+       /*
+       usermod -aG postgres vagrant
+       postgresql-setup --initdb
+       systemctl restart postgresql.service
+       su - postgres -c "psql -c \\"ALTER USER postgres WITH PASSWORD 'postgres'\\""
+       su - postgres -c "psql -c \\"CREATE USER vagrant WITH ENCRYPTED PASSWORD 'vagrant' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN\\""
+       su - postgres -c "mkdir -p /var/lib/pgsql/tblspc/vagrant_ts"
+       su - postgres -c "psql -c \\"CREATE TABLESPACE vagrant_ts OWNER vagrant LOCATION '/var/lib/pgsql/tblspc/vagrant_ts'\\""
+       su - postgres -c "psql -c \\"CREATE DATABASE vagrant WITH ENCODING = 'UTF8' OWNER = vagrant TABLESPACE = vagrant_ts CONNECTION LIMIT = -1\\""
+       su - postgres -c "psql -c \\"ALTER USER vagrant WITH PASSWORD 'vagrant'\\""
+       su - postgres -c "psql -c 'SELECT usename FROM pg_catalog.pg_user'"
+       su - postgres -c "psql -c 'SELECT datname FROM pg_database WHERE datistemplate=false'"
+       su - postgres -c "psql -c 'show data_directory'"
+       su - postgres -c "psql -c 'CREATE EXTENSION \\"pgcrypto\\"'"
+       su - postgres -c "psql -c 'CREATE EXTENSION \\"plpgsql\\"'"
+       su - postgres -c "psql -c 'CREATE EXTENSION \\"uuid-ossp\\"'"
+       su - postgres -c "psql -c 'select * from pg_extension'"
+       su - postgres -c "cp /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf.bak"
+       su - postgres -c "cp /var/lib/pgsql/data/postgresql.conf /var/lib/pgsql/data/postgresql.conf.bak"
+       su - postgres -c "sed -i 's/ident/scram-sha-256/g' /var/lib/pgsql/data/pg_hba.conf"
+       su - postgres -c "sed -i 's/peer/scram-sha-256/g' /var/lib/pgsql/data/pg_hba.conf"
+       su - postgres -c "sed -i 's/#[ ]*password_encryption.*/password_encryption = scram-sha-256/g' /var/lib/pgsql/data/postgresql.conf"
+       systemctl restart postgresql.service 
+*/
+       # =======  USERS  ======= (root : sudo su -)
+
+       # =======  KEYBOARD  =======
+       localectl set-locale LANG=fr_FR.utf8
+       localectl set-keymap fr-latin9
+       localectl status
+
+       # =======  BASHRC common  =======
+       cat >> /etc/bashrc <<EOF
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors)"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -Al'
+alias l='ls $LS_OPTIONS -A'
+alias h='history'
+alias b='vim ~/.bashrc'
+alias s='source ~/.bashrc'
+alias f='findmnt'
+EOF
+       # =======  BASHRC root  =======
+       cat >> /root/.bashrc <<EOF
+export PS1='\\[\\033[1;31m\\]\\u@`hostname -I | cut -d" " -f1`\\[\\033[00m\\]:\\[\\033[0;37m\\]\\w\\[\\033[00m\\] \\$ '
+EOF
+       # =======  BASHRC vagrant  =======
+       cat >> /home/vagrant/.bashrc <<EOF
+export PS1='\\[\\033[1;34m\\]\\u@`hostname -I | cut -d" " -f1`\\[\\033[00m\\]:\\[\\033[0;37m\\]\\w\\[\\033[00m\\] \\$ '
+EOF
+       # =======  BASHRC vagrant  =======
+       cat >> /home/vagrant/.bashrc <<EOF
+export PS1='\\[\\033[1;34m\\]\\u@`hostname -I | cut -d" " -f1`\\[\\033[00m\\]:\\[\\033[0;37m\\]\\w\\[\\033[00m\\] \\$ '
+EOF
+       cat >> /var/lib/pgsql/.bash_profile <<EOF
+export PS1='\\[\\033[1;36m\\]\\u@`hostname -I | cut -d" " -f1`\\[\\033[00m\\]:\\[\\033[0;37m\\]\\w\\[\\033[00m\\] \\$ '
+EOF
+       echo "END UPDATE SYSTEM"
+    SHELL
+  end
+  # _____________  myoraclelinux  _____________
+  
+  
+ 
+end
