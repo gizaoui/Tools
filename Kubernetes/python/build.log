@@ -1,0 +1,64 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.2s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 221B done
+#2 DONE 0.3s
+
+#3 [internal] load metadata for docker.io/library/python:3.10-slim
+#3 DONE 0.7s
+
+#4 [1/4] FROM docker.io/library/python:3.10-slim@sha256:64157e9ca781b9d18e4d7e613f4a3f19365a26d82da87ff1aa82a03eacb34687
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 991B done
+#5 DONE 0.1s
+
+#6 [2/4] WORKDIR /app
+#6 CACHED
+
+#7 [3/4] COPY . /app
+#7 DONE 0.8s
+
+#8 [4/4] RUN pip install -r requirements.txt
+#8 2.707 Collecting Flask
+#8 2.829   Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#8 2.894      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.7/101.7 kB 1.6 MB/s eta 0:00:00
+#8 3.070 Collecting Redis
+#8 3.091   Downloading redis-5.0.3-py3-none-any.whl (251 kB)
+#8 3.152      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 251.8/251.8 kB 4.3 MB/s eta 0:00:00
+#8 3.256 Collecting itsdangerous>=2.1.2
+#8 3.278   Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+#8 3.440 Collecting Werkzeug>=3.0.0
+#8 3.461   Downloading werkzeug-3.0.2-py3-none-any.whl (226 kB)
+#8 3.503      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.8/226.8 kB 5.5 MB/s eta 0:00:00
+#8 3.581 Collecting blinker>=1.6.2
+#8 3.604   Downloading blinker-1.7.0-py3-none-any.whl (13 kB)
+#8 3.737 Collecting Jinja2>=3.1.2
+#8 3.760   Downloading Jinja2-3.1.3-py3-none-any.whl (133 kB)
+#8 3.795      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.2/133.2 kB 4.7 MB/s eta 0:00:00
+#8 3.905 Collecting click>=8.1.3
+#8 3.927   Downloading click-8.1.7-py3-none-any.whl (97 kB)
+#8 3.961      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 3.1 MB/s eta 0:00:00
+#8 4.079 Collecting async-timeout>=4.0.3
+#8 4.104   Downloading async_timeout-4.0.3-py3-none-any.whl (5.7 kB)
+#8 4.390 Collecting MarkupSafe>=2.0
+#8 4.412   Downloading MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+#8 4.529 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, async-timeout, Werkzeug, Redis, Jinja2, Flask
+#8 5.640 Successfully installed Flask-3.0.3 Jinja2-3.1.3 MarkupSafe-2.1.5 Redis-5.0.3 Werkzeug-3.0.2 async-timeout-4.0.3 blinker-1.7.0 click-8.1.7 itsdangerous-2.1.2
+#8 5.641 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 5.958 
+#8 5.958 [notice] A new release of pip is available: 23.0.1 -> 24.0
+#8 5.958 [notice] To update, run: pip install --upgrade pip
+#8 DONE 6.8s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.7s done
+#9 writing image sha256:7ed6aaae420615f6857503f14f812019352d3a024426f011f07b5b78be41ba5a 0.0s done
+#9 naming to docker.io/library/myflaskmulticont 0.1s done
+#9 DONE 0.8s
