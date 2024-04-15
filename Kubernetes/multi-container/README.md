@@ -10,7 +10,7 @@ L'application python et à la base de données *Redis* sont situées sur le mêm
 redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 ```
 
-- Se positionner -> `cd ~/git/github/Tools/Kubernetes/python/multi-container`
+- Se positionner -> `cd ~/git/github/Tools/Kubernetes/multi-container`
 - Suppression de l'image -> `minikube image rm myflask-multi-cont`
 - Build -> `minikube image build -t myflask-multi-cont .`
 - Build docker -> `eval $(minikube -p minikube docker-env) && docker build -t myflask-multi-cont . 2>&1 | tee build.log`
@@ -19,7 +19,7 @@ redis=Redis(host="0.0.0.0", db=0, socket_connect_timeout=2, socket_timeout=2)
 
 ### 4.2. Flask + Redis
 
-- Se positionner -> `cd ~/git/github/Tools/Kubernetes/python/multi-container`
+- Se positionner -> `cd ~/git/github/Tools/Kubernetes/multi-container`
 - Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml`
 - Running -> `kubectl get pods`
 - Liste déploiement -> `kubectl get deployments`

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-project
+  name: nginx-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-project
+      app: nginx-selector
   template:
     metadata:
       labels:
-        app: nginx-project
+        app: nginx-selector
     spec:
       containers:
-        - name: nginx
+        - name: nginx-img
           image: nginx:latest
           ports:
             - containerPort: 80
@@ -25,21 +25,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-project
+  name: nginx-service
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-    - nodePort: 30007
-      port: 80
+    - port: 80
       targetPort: 80
 
   selector:
-    app: nginx-project
+    app: nginx-selector
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-project
+  name: nginx-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -51,6 +50,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: nginx-project
+                name: nginx-service
                 port:
                   number: 80
