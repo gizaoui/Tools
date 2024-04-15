@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-selector
+  template:
+    metadata:
+      labels:
+        app: redis-selector
+    spec:
+      containers:
+        - name: redis-img
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "500m"
+ #         volumeMounts:
+ #         - name: redis-storage
+ #           mountPath: /data/redis
+ #     volumes:
+ #     - name: redis-storage
+ #       emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myflask-multi-pod-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myflask-multi-pod-selector
+  template:
+    metadata:
+      labels:
+        app: myflask-multi-pod-selector
+    spec:
+      containers:
+        - name: myflask-multi-pod-img
+          image: myflask-multi-pod:latest
+          env:
+          - name: NAME
+            value: "My name"
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myflask-multi-pod-service
+spec:
+  type: NodePort
+  ports:
+    - nodePort: 30009
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: myflask-multi-pod-selector
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    app: redis-selector
