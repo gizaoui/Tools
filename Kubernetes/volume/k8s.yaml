@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-selector
+  template:
+    metadata:
+      labels:
+        app: nginx-selector
+    spec:
+      containers:
+        # Diffusion de la page web
+        - name: nginx-img
+          image: nginx:latest
+          ports:
+            - containerPort: 80 # Expose le port 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          # Volume partagé
+          volumeMounts:
+          - name: my-volume
+            mountPath: /usr/share/nginx/html # Dossier vide par défaut
+
+        # L'image debian permet la mise à jour du fichier index.html
+        - name: debian-img
+          image: debian:latest
+          command: ["sh", "-c"]
+          args:
+          - |
+            echo "<h1>Hello world !!!</h1>" > /myjob/index.html
+            sleep infinity
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          # Volume partagé
+          volumeMounts:
+          - name: my-volume
+            mountPath: /myjob/
+
+      # Volume partagé
+      volumes:
+      - name: my-volume
+        emptyDir: {} 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+
+  selector:
+    app: nginx-selector
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: hello-worldapp.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80
