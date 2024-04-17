@@ -22,6 +22,7 @@
 - INTERNAL-IP - EXTERNAL-IP -> `kubectl get nodes -o wide`
 - Param. de contruction de la requête -> `kubectl describe ingress nginx-ingress`
 - Test [Ingeress](https://blog.knoldus.com/how-to-create-ingress-rules-in-kubernetes-using-minikube/#what-is-ingress) (simule la màj de */etc/hosts* ) -> `curl http://hello-worldapp.com/ --resolve hello-worldapp.com:80:192.168.49.2`
+- Test -> `curl $(minikube service phpfpm-nginx-service --url)`
 
 - Supression
 
@@ -32,3 +33,10 @@ kubectl delete configmap nginx-config
 eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml
 ```
 
+Console de l'image -> `kubectl exec -it $(kubectl get pods | grep phpfpm-nginx-deploy- | cut -d" " -f1) -- /bin/bash`
+
+
+http://localhost:9090 -> `kubectl port-forward $(kubectl get pods | grep phpfpm-nginx-deploy- | cut -d" " -f1) 9090:80`
+
+
+http://192.168.49.2:30090

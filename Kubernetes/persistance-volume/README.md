@@ -1,9 +1,5 @@
-# INGRESS
+# POSTGRES
 
-
-### 4.1. NGINX
-
-https://gitlab.com/xavki/presentations-kubernetes/-/blob/master/54-hello-world/slides.md?ref_type=heads
 
 
 - Se positionner -> `cd ~/git/github/Tools/Kubernetes/persistance-volume`
