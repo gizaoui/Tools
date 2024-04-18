@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:7.4-fpm
 
 RUN apt-get -y update && apt-get install -y libssl-dev pkg-config libzip-dev unzip git \
 locales curl wget mlocate tree gnupg gcc make autoconf libc-dev libpq-dev libonig-dev
@@ -6,7 +6,7 @@ locales curl wget mlocate tree gnupg gcc make autoconf libc-dev libpq-dev liboni
 RUN pecl install zlib zip && docker-php-ext-enable zip
 
 RUN docker-php-ext-install pgsql
-RUN docker-php-ext-install pdo_pgsql
+# RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install mbstring
 
 # set locale to utf-8

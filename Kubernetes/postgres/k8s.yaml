@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
         - name: postgres-img
-          image: postgres:latest
+          image: postgres:14
           ports:
             - containerPort: 5432
           resources:
@@ -73,21 +73,23 @@ spec:
               cpu: "700m"
           imagePullPolicy: "IfNotPresent"
           env:
-           - name: POSTGRES_USER
-             valueFrom:
-               secretKeyRef:
-                 name: postgres-secret
-                 key: postgres-root-username
-           - name: POSTGRES_PASSWORD
-             valueFrom:
-               secretKeyRef:
-                 name: postgres-secret
-                 key: postgres-root-password
-           - name: POSTGRES_DB
-             valueFrom:
-               configMapKeyRef:
-                 name: postgres-configmap
-                 key: postgres-dbname
+            - name: PGDATA
+              value: /var/lib/postgresql/data/
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-root-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-root-password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: postgres-dbname
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb

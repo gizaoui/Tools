@@ -45,7 +45,7 @@ su - postgres -c "cp /var/lib/postgresql/data/postgresql.conf /var/lib/postgresq
 su - postgres -c "sed -i 's/trust/scram-sha-256/g' /var/lib/postgresql/data/pg_hba.conf" && \
 su - postgres -c "sed -i 's/trust/scram-sha-256/g' /var/lib/postgresql/data/pg_hba.conf" && \
 su - postgres -c "sed -i 's/#[ ]*password_encryption.*/password_encryption = scram-sha-256/g' /var/lib/postgresql/data/postgresql.conf" && \
-su - postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/lib/postgresql/data/ reload"
+su - postgres -c "/usr/lib/postgresql/14/bin/pg_ctl -D /var/lib/postgresql/data/ reload"
 ```
 
 ```bash

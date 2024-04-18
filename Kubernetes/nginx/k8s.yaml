@@ -36,7 +36,7 @@ data:
   default.conf: |
         server {
 
-            root /var/www/html;
+            root /var/www/html/phppgadmin;
             index index.php;
 
             location / {
@@ -97,7 +97,7 @@ spec:
             mountPath: /etc/nginx/conf.d/default.conf
             subPath: default.conf
           - name: www-storage
-            mountPath: /var/www/html
+            mountPath: /var/www/html/phppgadmin
           lifecycle:
             postStart:
               exec:
@@ -118,7 +118,7 @@ spec:
             mountPath: /etc/nginx/conf.d/default.conf
             subPath: default.conf
           - name: www-storage
-            mountPath: /var/www/html
+            mountPath: /var/www/html/phppgadmin
       volumes:
         - name: www-storage
           persistentVolumeClaim:
