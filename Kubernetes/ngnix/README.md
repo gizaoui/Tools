@@ -39,4 +39,4 @@ Console de l'image -> `kubectl exec -it $(kubectl get pods | grep phpfpm-nginx-d
 http://localhost:9090 -> `kubectl port-forward $(kubectl get pods | grep phpfpm-nginx-deploy- | cut -d" " -f1) 9090:80`
 
 
-http://192.168.49.2:30090
+http://192.168.49.2:30090/phpinfo.php

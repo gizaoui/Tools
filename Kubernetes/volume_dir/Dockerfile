@@ -16,8 +16,6 @@ ENV LANG='fr_FR.UTF-8' LANGUAGE='fr_FR:en' LC_ALL='fr_FR.UTF-8'
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
-
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 RUN echo "date.timezone=Europe/Rome" >> /usr/local/etc/php/php.ini
 
