@@ -21,6 +21,8 @@ RUN echo "date.timezone=Europe/Rome" >> /usr/local/etc/php/php.ini
 
 WORKDIR /app
 COPY index.php .
+COPY phpinfo.php .
+COPY testdb.php .
 COPY css ./css
 EXPOSE 9000
 CMD ["php-fpm"]

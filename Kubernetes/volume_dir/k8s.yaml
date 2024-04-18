@@ -6,13 +6,13 @@ metadata:
     type: local
     app: phpfpm-nginx
 spec:
-  storageClassName: manual
+  storageClassName: phpfpmstorage
   capacity:
     storage: 2Gi
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data"
+    path: "/mnt/phpfpm"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -21,7 +21,7 @@ metadata:
   labels:
     app: phpfpm-nginx
 spec:
-  storageClassName: manual
+  storageClassName: phpfpmstorage
   accessModes:
     - ReadWriteMany
   resources:
@@ -65,7 +65,7 @@ kind: Deployment
 metadata:
   labels:
     app: app
-  name: web
+  name: phpfpm-nginx-deploy
   namespace: default
 spec:
   replicas: 1

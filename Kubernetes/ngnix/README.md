@@ -40,3 +40,4 @@ http://localhost:9090 -> `kubectl port-forward $(kubectl get pods | grep phpfpm-
 
 
 http://192.168.49.2:30090/phpinfo.php
+http://192.168.49.2:30090/phppgadmin
