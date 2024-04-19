@@ -53,7 +53,6 @@ data:
                 fastcgi_param DOCUMENT_ROOT $realpath_root;
             }
 
-
             client_max_body_size 6m;
             error_log  /var/log/nginx/error.log;
             access_log /var/log/nginx/access.log;
@@ -102,7 +101,7 @@ spec:
               exec:
                 command: ["/bin/sh", "-c", "cp -r /app/* /var/www/html"]
         - name: nginx
-          image: nginx:alpine
+          image: nginx:latest
           imagePullPolicy: Always
           ports:
           - containerPort: 80
