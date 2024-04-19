@@ -94,9 +94,6 @@ class ADORecordSet implements IteratorAggregate { ...
 kubectl delete deployment phpfpm-nginx-deploy
 kubectl delete service phpfpm-nginx-service
 kubectl delete configmap phpfpm-nginx-configmap
-kubectl patch pvc phpfpm-nginx-pvc -p '{"metadata":{"finalizers":null}}'
-kubectl delete PersistentVolumeClaim phpfpm-nginx-pvc
-kubectl delete PersistentVolume phpfpm-nginx-pv
 eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml
 ```
 

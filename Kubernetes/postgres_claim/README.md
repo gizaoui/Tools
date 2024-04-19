@@ -20,6 +20,9 @@ kubectl delete deployment postgres-deploy
 kubectl delete service postgres-service
 kubectl delete configmap postgres-configmap
 kubectl delete Secret postgres-secret
+kubectl patch pvc postgres-pv-claim -p '{"metadata":{"finalizers":null}}'
+kubectl delete PersistentVolumeClaim postgres-pv-claim
+kubectl delete PersistentVolume postgres-pv-volume
 eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml
 ```
 
