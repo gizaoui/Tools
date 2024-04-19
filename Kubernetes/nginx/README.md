@@ -103,7 +103,8 @@ eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml
 
 Console de l'image -> `kubectl exec -it $(kubectl get pods | grep phpfpm-nginx-deploy | cut -d" " -f1) -- /bin/bash`
 
-- http://localhost:8080 -> `kubectl port-forward $(kubectl get pods | grep web- | cut -d" " -f1) 80:8080`
+- Accès direct http://localhost:9090 -> `kubectl port-forward $(kubectl get pods | grep phpfpm-nginx-deploy | cut -d" " -f1) 9090:80`
+
 - http://192.168.49.2:30091
 - http://192.168.49.2:30091/index.php
 - http://192.168.49.2:30091/phpinfo.php
