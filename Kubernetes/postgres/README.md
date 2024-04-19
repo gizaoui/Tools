@@ -57,4 +57,6 @@ su - postgres -c "psql -c 'select * from pg_extension'"
 
 Accès via *container* à la bdd -> `kubectl exec -it $(kubectl get pods | grep postgres- | cut -d" " -f1) -- psql -h localhost -U postgres`
 Accès direct à la bdd -> `psql -h 192.168.49.2 -p 30432 -U postgres -d postgres`
+Accès direct à la bdd -> `psql -h 192.168.49.2 -p 30432 -U gizaoui -d gizaoui`
 
+CREATE TABLE IF NOT EXISTS t1 ( c1 INT, c2 VARCHAR(10) );

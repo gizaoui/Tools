@@ -100,7 +100,7 @@ class Decorator
 	}
 }
 
-#[AllowDynamicProperties]
+// #[AllowDynamicProperties]
 class FieldDecorator extends Decorator
 {
 	function __construct($fieldName, $default = null) {
@@ -172,7 +172,7 @@ class IfEmptyDecorator extends Decorator
 	}
 }
 
-#[AllowDynamicProperties]
+// #[AllowDynamicProperties]
 class UrlDecorator extends Decorator
 {
 	function __construct($base, $queryVars = null) {

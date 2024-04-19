@@ -51,7 +51,10 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app: postgres-v14
   name: postgres-deploy
+  namespace: default
 spec:
   selector:
    matchLabels:

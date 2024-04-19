@@ -64,7 +64,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: app
+    app: phpfpm-nginx
   name: phpfpm-nginx-deploy
   namespace: default
 spec:

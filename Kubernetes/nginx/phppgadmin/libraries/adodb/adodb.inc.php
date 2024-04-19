@@ -2730,26 +2730,26 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 		{
 	        $this->rs = $rs;
 	    }
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function rewind() 
 		{
 	    }
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 		function valid() 
 		{
 	        return !$this->rs->EOF;
 	    }
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function key() 
 		{
 	        return false;
 	    }
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function current() 
 		{
 	        return false;
 	    }
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function next() 
 		{
 	    }
@@ -2785,7 +2785,7 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 		function FetchRow() {return false;}
 		function FieldCount(){ return 0;}
 		function Init() {}
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 		function getIterator() {return new ADODB_Iterator_empty($this);}
 	}
 	
@@ -2807,31 +2807,31 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 	        $this->rs = $rs;
 	    }
 
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function rewind() 
 		{
 	        $this->rs->MoveFirst();
 	    }
 	
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 		function valid() 
 		{
 	        return !$this->rs->EOF;
 	    }
 		
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function key() 
 		{
 	        return $this->rs->_currentRow;
 	    }
 		
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function current() 
 		{
 	        return $this->rs->fields;
 	    }
 		
-		#[\ReturnTypeWillChange] 
+		// #[\ReturnTypeWillChange] 
 	    function next() 
 		{
 	        $this->rs->MoveNext();
@@ -2908,7 +2908,7 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 		$this->_queryID = $queryID;
 	}
 	
-	#[\ReturnTypeWillChange] 
+	// #[\ReturnTypeWillChange] 
 	function getIterator() 
 	{
         return new ADODB_Iterator($this);
