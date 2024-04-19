@@ -1,3 +1,24 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgres-configmap
+data:
+  config.sh: |
+    su - postgres -c "psql -c \"CREATE USER gizaoui WITH ENCRYPTED PASSWORD 'gizaoui' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN\"" && \
+    su - postgres -c "mkdir -p /var/lib/postgresql/tblspc/gizaoui_ts" && \
+    su - postgres -c "psql -c \"CREATE TABLESPACE gizaoui_ts OWNER gizaoui LOCATION '/var/lib/postgresql/tblspc/gizaoui_ts'\"" && \
+    su - postgres -c "psql -c \"CREATE DATABASE gizaoui WITH ENCODING = 'UTF8' OWNER = gizaoui TABLESPACE = gizaoui_ts CONNECTION LIMIT = -1\"" && \
+    su - postgres -c "psql -c \"ALTER USER gizaoui WITH PASSWORD 'gizaoui'\""
+    su - postgres -c "psql -c 'CREATE EXTENSION IF NOT EXISTS \"pgcrypto\"'" && \
+    su - postgres -c "psql -c 'CREATE EXTENSION IF NOT EXISTS  \"plpgsql\"'" && \
+    su - postgres -c "psql -c 'CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"'" && \
+    su - postgres -c "cp /var/lib/postgresql/data/pg_hba.conf /var/lib/postgresql/data/pg_hba.conf.bak" && \
+    su - postgres -c "cp /var/lib/postgresql/data/postgresql.conf /var/lib/postgresql/data/postgresql.conf.bak" && \
+    su - postgres -c "sed -i 's/trust/scram-sha-256/g' /var/lib/postgresql/data/pg_hba.conf" && \
+    su - postgres -c "sed -i 's/trust/scram-sha-256/g' /var/lib/postgresql/data/pg_hba.conf" && \
+    su - postgres -c "sed -i 's/#[ ]*password_encryption.*/password_encryption = scram-sha-256/g' /var/lib/postgresql/data/postgresql.conf" && \
+    su - postgres -c "/usr/lib/postgresql/14/bin/pg_ctl -D /var/lib/postgresql/data/ reload"
+---
 apiVersion: v1
 kind: Secret
 metadata:
@@ -8,15 +29,6 @@ type: Opaque
 data:
     postgres-root-username: cG9zdGdyZXM=
     postgres-root-password: cG9zdGdyZXM=
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgres-configmap
-  labels:
-    app: postgres
-data:
-  postgres-dbname: mydb
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,6 +57,10 @@ spec:
               memory: "700Mi"
               cpu: "700m"
           imagePullPolicy: "IfNotPresent"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp /tmp/config.sh /tmp/cpyconfig.sh && chmod 755 /tmp/cpyconfig.sh"]
           env:
             - name: PGDATA
               value: /var/lib/postgresql/data/
@@ -58,18 +74,19 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: postgres-root-password
-            - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-configmap
-                  key: postgres-dbname
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb
+            - name: share-postgres-volume
+              mountPath: /tmp/config.sh
+              subPath: config.sh
 
       volumes:
         - name: postgredb
           emptyDir: {}
+        - name: share-postgres-volume
+          configMap:
+            name: postgres-configmap
 ---
 apiVersion: v1
 kind: Service

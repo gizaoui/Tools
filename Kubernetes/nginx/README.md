@@ -63,20 +63,16 @@ class ADORecordSet implements IteratorAggregate { ...
 
 ### 1.2 Contruction de l'image Dockerfile
 
-- Se positionner -> `cd ~/git/github/Tools/Kubernetes/nginx`
-- Suppression de l'image -> `minikube image rm php-fpm`
-- Build docker -> `eval $(minikube -p minikube docker-env) && docker build -t php-fpm . 2>&1 | tee build.log`
-- Build -> `minikube image build -t php-fpm .`
-- Liste des images -> `minikube image ls --format table`
-- Suppression des images *none* `minikube image ls --format table | grep docker.io\/library\/\<none\> | cut -d"|" -f4 | xargs minikube image rm`
+- Build docker -> `cd ~/git/github/Tools/Kubernetes/nginx && eval $(minikube -p minikube docker-env) && docker build -t php-fpm .`
+
+
 
 
 
 ### KUBECTL
 
 
-- Se positionner -> `cd ~/git/github/Tools/Kubernetes/nginx`
-- Déploiement -> `eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml`
+- Déploiement -> `cd ~/git/github/Tools/Kubernetes/nginx && eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml`
 - Log -> `kubectl logs deployment/phpfpm-nginx-deploy`
 - Liste service -> `kubectl get deployment`
 - Liste service -> `kubectl get service`
@@ -94,7 +90,7 @@ class ADORecordSet implements IteratorAggregate { ...
 kubectl delete deployment phpfpm-nginx-deploy
 kubectl delete service phpfpm-nginx-service
 kubectl delete configmap phpfpm-nginx-configmap
-eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml
+cd ~/git/github/Tools/Kubernetes/nginx && eval $(minikube -p minikube docker-env) && kubectl create -f ./k8s.yaml
 ```
 
 
