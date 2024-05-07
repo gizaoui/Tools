@@ -12,8 +12,8 @@ redis=Redis(host="redis-project", db=0, socket_connect_timeout=2, socket_timeout
 ```
 
 - Se positionner -> `cd ~/git/github/Tools/Kubernetes/multi-pod`
-- Suppression de l'image -> `minikube image rm myflask-multi-pod`
-- Build -> `minikube image build -t myflask-multi-pod .`
+- Suppression de l'image -> `minikube image rm myflask:v1.0`
+- Build -> `eval $(minikube -p minikube docker-env) && docker image build -t myflask:v1.0 .`
 - Liste des images -> `minikube image ls --format table`
 - Suppression des images *none* `minikube image ls --format table | grep docker.io\/library\/\<none\> | cut -d"|" -f4 | xargs minikube image rm`
 
@@ -25,7 +25,7 @@ redis=Redis(host="redis-project", db=0, socket_connect_timeout=2, socket_timeout
 - Log -> `kubectl logs deployment/myflask-project`
 - Liste déploiement -> `kubectl get deployments`
 - Liste service -> `kubectl get services`
-- Test -> `curl $(minikube service myflask-multi-pod-service --url)`
+- Test -> `curl $(minikube service myflask-service --url)`
 
 
 - Delete all

@@ -25,20 +25,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myflask-multi-pod-deploy
+  name: myflask-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myflask-multi-pod-selector
+      app: myflask-selector
   template:
     metadata:
       labels:
-        app: myflask-multi-pod-selector
+        app: myflask-selector
     spec:
       containers:
-        - name: myflask-multi-pod-img
-          image: myflask-multi-pod:latest
+        - name: myflask-img
+          image: myflask:v1.0
           env:
           - name: NAME
             value: "My name"
@@ -53,7 +53,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: myflask-multi-pod-service
+  name: myflask-service
 spec:
   type: NodePort
   ports:
@@ -61,7 +61,7 @@ spec:
       port: 5000
       targetPort: 5000
   selector:
-    app: myflask-multi-pod-selector
+    app: myflask-selector
 ---
 apiVersion: v1
 kind: Service
