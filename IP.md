@@ -18,7 +18,7 @@ La partie basse du masque sous réseau renvoit un CIDR à 18 &nbsp;&#8640;&nbsp;
 
 | Libellé | Opération | Résultat | Commande |
 |:-:|:-:|:-:|:-:|
-| Adresse IP | | 11000000.10101000.00000000.00000101 | `echo "obase=2;172;128;10;5" \| bc \| tr '\n' '.'` |
+| Adresse IP (172.128.10.5)| | 11000000.10101000.00000000.00000101 | `echo "obase=2;172;128;10;5" \| bc \| tr '\n' '.'` |
 | Masque sous-réseau | & |  11111111.11111111.11000000.00000000 ||
 | Adresses du réseau (172.128.0.0) | = | 10101100.10000000.00000000.00000000 ||
                                                                           
