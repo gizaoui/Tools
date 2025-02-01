@@ -20,9 +20,9 @@ On part de l'adresse IP **172.128.10.5**.
 
 | Libellé | Opération | IP décimal | IP Binaire | Remarque |
 |:-:|:-:|:-:|:-:|:-:|
-| Adresse IP | | **172.128.10.5** | 10101100.10000000.00000000.00000101 | **Conversion en binaire :** `echo "obase=2;172;128;10;5" \| bc \| tr '\n' '.'` |
+| Adresse IP | | **172.128.10.5** | 10101100.10000000.00000000.00000101 | **Conversion en binaire :** <br> `echo "obase=2;172;128;10;5" \| bc \| tr '\n' '.'` |
 | Masque sous-réseau | & | 2⁸-1.2⁸-1.2⁷+2⁶.0 <br> 255.255.192.0| 11111111.11111111.11000000.00000000 | 18 premiers bits |
-| Adresses du réseau | = | 172.128.0.0 | 10101100.10000000.00000000.00000000 | **Conversion en décimal :** `echo $(echo 'obase=10;ibase=2;10101100'\|bc)\.echo $(echo 'obase=10;ibase=2;10000000'\|bc)\.$(echo '0')\.$(echo '0')` |
+| Adresses du réseau | = | 172.128.0.0 | 10101100.10000000.00000000.00000000 | **Conversion en décimal :** <br> `echo $(echo 'obase=10;ibase=2;10101100'\|bc)\.echo $(echo 'obase=10;ibase=2;10000000'\|bc)\.$(echo '0')\.$(echo '0')` |
                                                                           
 ## Adresse de broadcast
 
