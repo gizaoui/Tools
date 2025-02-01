@@ -30,7 +30,7 @@ La partie basse du masque sous réseau renvoit un CIDR à 18 &nbsp;&#8640;&nbsp;
 |:-:|:-:|:-:|:-:|:-:|
 | Adresses du réseau | | 172.128.0.0 | 10101100.10000000.00000000.00000000 | |
 | Partie basse sous réseau | \| |  | 00000000.00000000.00111111.11111111 ||
-| Adresses du réseau | = | (172.128.63.255 | 10101100.10000000.00111111.11111111 ||
+| Adresses du réseau | = | 172.128.63.255 | 10101100.10000000.00111111.11111111 ||
 
 
 ## Plage d'IP :
