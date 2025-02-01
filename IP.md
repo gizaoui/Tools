@@ -22,11 +22,16 @@ La partie basse du masque sous réseau renvoit un CIDR à 18 &nbsp;&#8640;&nbsp;
 | Masque sous-réseau | & |  | 11111111.11111111.11000000.00000000 ||
 | Adresses du réseau | = | 172.128.0.0 | 10101100.10000000.00000000.00000000 ||
                                                                           
-## Adresse de broadcast 
-Adresses du réseau | Partie basse sous réseau :
-Adresses du réseau (172.128.0.0) :        10101100.10000000.00000000.00000000
-Partie basse sous réseau :              | 00000000.00000000.00111111.11111111
-Adresse de broadcast (172.128.63.255):  = 10101100.10000000.00111111.11111111
+## Adresse de broadcast
+
+*Adresses du réseau **|** Partie basse sous réseau*
+
+| Libellé | Opération | IP décimal | IP Binaire | Commande |
+|:-:|:-:|:-:|:-:|:-:|
+| Adresses du réseau | | 172.128.0.0 | 10101100.10000000.00000000.00000000 | |
+| Partie basse sous réseau | \| |  | 11111111.11111111.11000000.00000000 ||
+| Adresses du réseau | = | (172.128.63.255 | 10101100.10000000.00111111.11111111 ||
+
 
 ## Plage d'IP :
 Adresse du réseau +1 (ou gateway +1) = 172.128.0.1 &nbsp;&#8640;&nbsp; Adresse de broadcast -1 = 172.128.63.254
